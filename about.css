@@ -1,0 +1,383 @@
+/* CSS Variables */
+:root {
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --primary-color: #4285f4;
+    --text-color: #333;
+    --bg-color: #f8f9fa;
+    --card-bg: #fff;
+    --progress-bg: #e9ecef;
+    --progress-green: #28a745;
+    --progress-yellow-green: #74cd1b;
+    --progress-yellow: #ffe100;
+    --progress-orange: #ff9900;
+    --progress-red: #dc3545;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --border-hover: #dee2e6;
+    --icon-color: #6c757d;
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Base Styles */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background-color: var(--bg-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 30px 1rem 100px;
+    overflow-x: hidden;
+}
+
+/* Timer Card */
+.timer-card {
+    background: var(--card-bg);
+    border-radius: 0.75rem;
+    box-shadow: 0 0.25rem 0.5rem var(--shadow-color);
+    padding: 1.5rem;
+    width: 80%;
+    max-width: 50rem;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.timer-card:hover {
+    border-color: var(--border-hover);
+}
+
+.about-title {
+    text-align: left;
+    margin: 0.5rem 0;
+    font-size: 2.5rem;
+    color: var(--text-color);
+    padding: 0.2rem;
+    border-radius: 0.25rem;
+    transition: all 0.2s ease;
+}
+
+.about-subtitle {
+    color: var(--icon-color);
+    margin-bottom: 1rem;
+}
+
+.about-content {
+    text-align: left;
+    color: var(--text-color);
+    margin: 1rem 0;
+}
+
+.about-content section {
+    margin-bottom: 1.5rem;
+}
+
+.about-content h2 {
+    border-bottom: 1px solid var(--border-hover);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.about-content h3, 
+.about-content h4 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.about-content p, 
+.about-content ul {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.about-content ul {
+    list-style-type: none;
+    padding: 0;
+    padding-left: 1.5rem;
+}
+
+.about-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.about-links .about-link {
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.about-links .close-link {
+    background-color: var(--danger-color);
+}
+
+.about-links .about-link:hover {
+    background-color: #3367d6;
+}
+
+.about-benefits li i {
+    margin-right: 0.5rem;
+}
+
+.about-steps .step h3,
+.about-grid .grid-item h3 {
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.about-steps .step p i {
+    margin-right: 0.5rem;
+}
+
+.dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.dot.green { background-color: var(--progress-green); }
+.dot.yellow { background-color: var(--progress-yellow); }
+.dot.orange { background-color: var(--progress-orange); }
+.dot.red { background-color: var(--progress-red); }
+
+.bibliography {
+    margin-top: 2rem;
+    text-align: left;
+}
+
+.bibliography hr {
+    border: none;
+    border-top: 1px solid var(--icon-color);
+    margin: 1rem 0;
+}
+
+.bibliography h4 {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.bibliography .citation-list {
+    font-size: 0.8rem;
+    color: var(--icon-color);
+    line-height: 1.5;
+}
+
+.bibliography .citation-list p {
+    margin-bottom: 0.5rem;
+    text-indent: -1.5rem;
+    padding-left: 1.5rem;
+}
+
+.bibliography .citation-list em {
+    font-style: italic;
+}
+
+.tech-stack {
+    margin-top: 2rem;
+    text-align: left;
+}
+
+.tech-stack hr {
+    border: none;
+    border-top: 1px solid var(--icon-color);
+    margin: 1rem 0;
+}
+
+.tech-stack h4 {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.tech-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    font-size: 0.9rem;
+}
+
+.tech-section {
+    background-color: rgba(0,0,0,0.02);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.tech-section h5 {
+    color: var(--text-color);
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding-bottom: 0.5rem;
+}
+
+.tech-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.tech-section ul li {
+    margin-bottom: 0.5rem;
+    color: var(--icon-color);
+}
+
+.tech-section ul li strong {
+    color: var(--text-color);
+    margin-right: 0.5rem;
+}
+
+.development-process {
+    margin-top: 2rem;
+    text-align: left;
+}
+
+.development-process hr {
+    border: none;
+    border-top: 1px solid var(--icon-color);
+    margin: 1rem 0;
+}
+
+.development-process h4 {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.process-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    font-size: 0.9rem;
+}
+
+.process-section {
+    background-color: rgba(0,0,0,0.02);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.process-section h5 {
+    color: var(--text-color);
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding-bottom: 0.5rem;
+}
+
+.process-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.process-section ul li {
+    margin-bottom: 0.5rem;
+    color: var(--icon-color);
+}
+
+.process-section ul li strong {
+    color: var(--text-color);
+    margin-right: 0.5rem;
+}
+
+.copyright-notice {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 0.5rem;
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--icon-color);
+    border-top: 1px solid rgba(0,0,0,0.1);
+    background-color: var(--bg-color);
+}
+
+.copyright-notice a {
+    color: var(--icon-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.copyright-notice a:hover {
+    color: var(--text-color);
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .timer-card {
+        width: 95%;
+        padding: 1rem;
+    }
+
+    .about-title {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .about-subtitle {
+        text-align: center;
+    }
+
+    .about-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-grid .grid-item {
+        width: 100%;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    .about-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-links .about-link {
+        width: 80%;
+        justify-content: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .about-content section {
+        margin-bottom: 2rem;
+    }
+
+    .psychology-details {
+        text-align: center;
+    }
+
+    .psychology-details h4 {
+        margin-top: 1rem;
+    }
+
+    .bibliography .citation-list p {
+        text-indent: 0;
+        padding-left: 0;
+    }
+}

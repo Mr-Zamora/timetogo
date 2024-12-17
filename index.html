@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <meta name="description" content="Exam time management tool that helps students reduce stress and improve performance. Intuitive timer with color-coded progress tracking.">
+    <meta name="keywords" content="exam timer, student time management, stress reduction, study timer, academic performance">
+    <link rel="canonical" href="https://timetogo.app/index.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://timetogo.app/">
+    <meta property="og:title" content="TimeToGo: Exam Time Management Timer">
+    <meta property="og:description" content="Reduce exam stress with an intuitive time management tool for students.">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="https://timetogo.app/">
+    <meta name="twitter:title" content="TimeToGo: Exam Time Management Timer">
+    <meta name="twitter:description" content="Reduce exam stress with an intuitive time management tool for students."/>
+    <link rel="stylesheet" href="about.css">
+    <link rel="stylesheet" href="timetogo.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.4.4/luxon.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="timer-card">
+        <div class="expand-icon">
+            <i class="fas fa-expand"></i>
+        </div>
+        <h2 class="timer-title" contenteditable="true">Subject name</h2>
+        <div class="timer-times">
+            <div class="start-time" data-tooltip="Pause timer to change times">
+                <span class="time-part hour">12</span>:<span class="time-part minute">00</span><span class="time-part period">AM</span>
+                <div class="time-dropdown hour-dropdown">
+                    <div class="dropdown-content">
+                        <div class="dropdown-item">01</div>
+                        <div class="dropdown-item">02</div>
+                        <div class="dropdown-item">03</div>
+                        <div class="dropdown-item">04</div>
+                        <div class="dropdown-item">05</div>
+                        <div class="dropdown-item">06</div>
+                        <div class="dropdown-item">07</div>
+                        <div class="dropdown-item">08</div>
+                        <div class="dropdown-item">09</div>
+                        <div class="dropdown-item">10</div>
+                        <div class="dropdown-item">11</div>
+                        <div class="dropdown-item">12</div>
+                    </div>
+                </div>
+                <div class="time-dropdown minute-dropdown">
+                    <div class="dropdown-content">
+                        <div class="dropdown-item">00</div>
+                        <div class="dropdown-item">01</div>
+                        <div class="dropdown-item">02</div>
+                        <div class="dropdown-item">03</div>
+                        <div class="dropdown-item">04</div>
+                        <div class="dropdown-item">05</div>
+                        <div class="dropdown-item">06</div>
+                        <div class="dropdown-item">07</div>
+                        <div class="dropdown-item">08</div>
+                        <div class="dropdown-item">09</div>
+                        <div class="dropdown-item">10</div>
+                        <div class="dropdown-item">11</div>
+                        <div class="dropdown-item">12</div>
+                        <div class="dropdown-item">13</div>
+                        <div class="dropdown-item">14</div>
+                        <div class="dropdown-item">15</div>
+                        <div class="dropdown-item">16</div>
+                        <div class="dropdown-item">17</div>
+                        <div class="dropdown-item">18</div>
+                        <div class="dropdown-item">19</div>
+                        <div class="dropdown-item">20</div>
+                        <div class="dropdown-item">21</div>
+                        <div class="dropdown-item">22</div>
+                        <div class="dropdown-item">23</div>
+                        <div class="dropdown-item">24</div>
+                        <div class="dropdown-item">25</div>
+                        <div class="dropdown-item">26</div>
+                        <div class="dropdown-item">27</div>
+                        <div class="dropdown-item">28</div>
+                        <div class="dropdown-item">29</div>
+                        <div class="dropdown-item">30</div>
+                        <div class="dropdown-item">31</div>
+                        <div class="dropdown-item">32</div>
+                        <div class="dropdown-item">33</div>
+                        <div class="dropdown-item">34</div>
+                        <div class="dropdown-item">35</div>
+                        <div class="dropdown-item">36</div>
+                        <div class="dropdown-item">37</div>
+                        <div class="dropdown-item">38</div>
+                        <div class="dropdown-item">39</div>
+                        <div class="dropdown-item">40</div>
+                        <div class="dropdown-item">41</div>
+                        <div class="dropdown-item">42</div>
+                        <div class="dropdown-item">43</div>
+                        <div class="dropdown-item">44</div>
+                        <div class="dropdown-item">45</div>
+                        <div class="dropdown-item">46</div>
+                        <div class="dropdown-item">47</div>
+                        <div class="dropdown-item">48</div>
+                        <div class="dropdown-item">49</div>
+                        <div class="dropdown-item">50</div>
+                        <div class="dropdown-item">51</div>
+                        <div class="dropdown-item">52</div>
+                        <div class="dropdown-item">53</div>
+                        <div class="dropdown-item">54</div>
+                        <div class="dropdown-item">55</div>
+                        <div class="dropdown-item">56</div>
+                        <div class="dropdown-item">57</div>
+                        <div class="dropdown-item">58</div>
+                        <div class="dropdown-item">59</div>
+                    </div>
+                </div>
+                <div class="time-dropdown period-dropdown">
+                    <div class="dropdown-content">
+                        <div class="dropdown-item">AM</div>
+                        <div class="dropdown-item">PM</div>
+                    </div>
+                </div>
+            </div>
+            <div class="end-time" data-tooltip="Reset timer to change times">
+                <span class="time-part hour">12</span>:<span class="time-part minute">00</span><span class="time-part period">AM</span>
+                <div class="time-dropdown hour-dropdown">
+                    <div class="dropdown-content">
+                        <div class="dropdown-item">01</div>
+                        <div class="dropdown-item">02</div>
+                        <div class="dropdown-item">03</div>
+                        <div class="dropdown-item">04</div>
+                        <div class="dropdown-item">05</div>
+                        <div class="dropdown-item">06</div>
+                        <div class="dropdown-item">07</div>
+                        <div class="dropdown-item">08</div>
+                        <div class="dropdown-item">09</div>
+                        <div class="dropdown-item">10</div>
+                        <div class="dropdown-item">11</div>
+                        <div class="dropdown-item">12</div>
+                    </div>
+                </div>
+                <div class="time-dropdown minute-dropdown">
+                    <div class="dropdown-content">
+                        <div class="dropdown-item">00</div>
+                        <div class="dropdown-item">01</div>
+                        <div class="dropdown-item">02</div>
+                        <div class="dropdown-item">03</div>
+                        <div class="dropdown-item">04</div>
+                        <div class="dropdown-item">05</div>
+                        <div class="dropdown-item">06</div>
+                        <div class="dropdown-item">07</div>
+                        <div class="dropdown-item">08</div>
+                        <div class="dropdown-item">09</div>
+                        <div class="dropdown-item">10</div>
+                        <div class="dropdown-item">11</div>
+                        <div class="dropdown-item">12</div>
+                        <div class="dropdown-item">13</div>
+                        <div class="dropdown-item">14</div>
+                        <div class="dropdown-item">15</div>
+                        <div class="dropdown-item">16</div>
+                        <div class="dropdown-item">17</div>
+                        <div class="dropdown-item">18</div>
+                        <div class="dropdown-item">19</div>
+                        <div class="dropdown-item">20</div>
+                        <div class="dropdown-item">21</div>
+                        <div class="dropdown-item">22</div>
+                        <div class="dropdown-item">23</div>
+                        <div class="dropdown-item">24</div>
+                        <div class="dropdown-item">25</div>
+                        <div class="dropdown-item">26</div>
+                        <div class="dropdown-item">27</div>
+                        <div class="dropdown-item">28</div>
+                        <div class="dropdown-item">29</div>
+                        <div class="dropdown-item">30</div>
+                        <div class="dropdown-item">31</div>
+                        <div class="dropdown-item">32</div>
+                        <div class="dropdown-item">33</div>
+                        <div class="dropdown-item">34</div>
+                        <div class="dropdown-item">35</div>
+                        <div class="dropdown-item">36</div>
+                        <div class="dropdown-item">37</div>
+                        <div class="dropdown-item">38</div>
+                        <div class="dropdown-item">39</div>
+                        <div class="dropdown-item">40</div>
+                        <div class="dropdown-item">41</div>
+                        <div class="dropdown-item">42</div>
+                        <div class="dropdown-item">43</div>
+                        <div class="dropdown-item">44</div>
+                        <div class="dropdown-item">45</div>
+                        <div class="dropdown-item">46</div>
+                        <div class="dropdown-item">47</div>
+                        <div class="dropdown-item">48</div>
+                        <div class="dropdown-item">49</div>
+                        <div class="dropdown-item">50</div>
+                        <div class="dropdown-item">51</div>
+                        <div class="dropdown-item">52</div>
+                        <div class="dropdown-item">53</div>
+                        <div class="dropdown-item">54</div>
+                        <div class="dropdown-item">55</div>
+                        <div class="dropdown-item">56</div>
+                        <div class="dropdown-item">57</div>
+                        <div class="dropdown-item">58</div>
+                        <div class="dropdown-item">59</div>
+                    </div>
+                </div>
+                <div class="time-dropdown period-dropdown">
+                    <div class="dropdown-content">
+                        <div class="dropdown-item">AM</div>
+                        <div class="dropdown-item">PM</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+        <div class="timer-bottom-row">
+            <button class="timer-button start">
+                <i class="fas fa-play"></i> Start
+            </button>
+            <div class="timer-info">
+                <span class="time-remaining">0 minutes to go</span>
+            </div>
+            <button class="timer-button reset">
+                <i class="fas fa-undo"></i> Reset
+            </button>
+        </div>
+    </div>
+
+    <footer class="copyright-notice">
+        <a href="about.html">&copy; 2024 Rom Zamora. All Rights Reserved. Created with Windsurf AI and Codeium.</a>
+    </footer>
+    <script src="timetogo.js"></script>
+</body>
+</html>
