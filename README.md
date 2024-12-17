@@ -95,10 +95,10 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Rommel Zamora - [romzamora@gmail.com](mailto:romzamora@gmail.com)
+Rom Zamora - [romzamora@gmail.com](mailto:romzamora@gmail.com)
 
 Project Link: [https://github.com/yourusername/timetogo](https://github.com/yourusername/timetogo)
 
 ---
 
-**Made with ❤️ by a passionate developer and highschool teacher.**
+**Made with ❤️ by a passionate developer and high school teacher.**
