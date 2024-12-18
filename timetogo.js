@@ -223,12 +223,31 @@ class Timer {
             this.endTimeEl.classList.add('disabled');
             this.timerTitle.classList.add('disabled');
             this.timerTitle.contentEditable = 'false';
+
+            // Disable about link when timer starts
+            const aboutLink = document.querySelector('footer a[href="about.html"]');
+            if (aboutLink) {
+                aboutLink.classList.add('disabled-link');
+                aboutLink.addEventListener('click', this.preventNavigation);
+            }
         } else {
             this.pauseTimer();
             this.startButton.innerHTML = '<i class="fas fa-play"></i>&nbsp;Resume';
             this.startButton.classList.remove('start', 'pause');
             this.startButton.classList.add('resume');
+
+            // Re-enable about link when timer is paused
+            const aboutLink = document.querySelector('footer a[href="about.html"]');
+            if (aboutLink) {
+                aboutLink.classList.remove('disabled-link');
+                aboutLink.removeEventListener('click', this.preventNavigation);
+            }
         }
+    }
+
+    preventNavigation(e) {
+        e.preventDefault();
+        alert('Please pause the timer before navigating to About page.');
     }
 
     startTimer() {
