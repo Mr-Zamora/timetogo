@@ -125,7 +125,7 @@ body {
 }
 
 .timer-card.expanded .timer-title {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     margin-bottom: 2rem;
 }
 
@@ -190,7 +190,7 @@ body {
 
 .timer-card.expanded .start-time,
 .timer-card.expanded .end-time {
-    font-size: 3.5rem;
+    font-size: 4.5rem;
 }
 
 .start-time {
@@ -375,7 +375,7 @@ body {
 }
 
 .timer-card.expanded .time-remaining {
-    font-size: 2rem;
+    font-size: 3.5rem;
 }
 
 /* Tooltip styles */
@@ -409,10 +409,30 @@ body {
     display: none;
 }
 
-/* Responsive Adjustments */
-@media (max-width: 480px) {
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    body {
+        padding: 0.5rem;
+    }
+
     .timer-card {
+        max-width: 100%;
         padding: 1rem;
+    }
+
+    .timer-card.expanded {
+        max-width: 100%;
+        transform: none;
+        padding: 1rem;
+    }
+
+    .timer-title {
+        font-size: 1.2rem;
+    }
+
+    .timer-card.expanded .timer-title {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
     }
 
     .start-time,
@@ -420,8 +440,86 @@ body {
         font-size: 1.5rem;
     }
 
+    .timer-card.expanded .start-time,
+    .timer-card.expanded .end-time {
+        font-size: 2.5rem;
+    }
+
+    .expand-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+        top: 0.5rem;
+        right: 0.5rem;
+    }
+
+    .timer-times {
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .start-time,
+    .end-time {
+        text-align: left;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .timer-title {
+        font-size: 1.1rem;
+    }
+
+    .timer-card.expanded .timer-title {
+        font-size: 1.6rem;
+    }
+
+    .start-time,
+    .end-time {
+        font-size: 1.3rem;
+    }
+
+    .timer-card.expanded .start-time,
+    .timer-card.expanded .end-time {
+        font-size: 2.2rem;
+    }
+
+    .timer-card {
+        padding: 0.75rem;
+    }
+    
     .timer-button {
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Disable expand icon on small mobile devices (multiple device sizes) */
+@media screen and (max-width: 932px) and (max-height: 600px),
+       screen and (max-width: 768px),
+       screen and (max-width: 480px),
+       screen and (device-width: 430px) and (device-height: 932px) {
+    .expand-icon {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+
+    .timer-card {
+        max-width: 100%;
+    }
+
+    .timer-card:hover .expand-icon {
+        display: none !important;
+    }
+}
+
+/* Ensure touch targets are large enough */
+@media (pointer: coarse) {
+    .time-part,
+    .expand-icon,
+    .timer-button {
+        min-height: 44px;
+        min-width: 44px;
     }
 }
 
