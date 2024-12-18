@@ -395,6 +395,13 @@ class Timer {
             this.startButton.classList.add('disabled');
             this.startButton.disabled = true;
             this.timeRemaining.textContent = 'Time is up';
+
+            // Reenable about link when timer is finished
+            const aboutLink = document.querySelector('footer a[href="about.html"]');
+            if (aboutLink) {
+                aboutLink.classList.remove('disabled-link');
+                aboutLink.removeEventListener('click', this.preventNavigation);
+            }
             return;
         }
 
