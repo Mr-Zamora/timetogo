@@ -72,6 +72,8 @@ class Timer {
                 this.updateTimer(elapsed);
             }
         });
+
+        this.setupThemeToggle();
     }
 
     setupTimeEditing() {
@@ -147,6 +149,30 @@ class Timer {
             if (e.key === 'Enter') {
                 e.preventDefault();
                 this.timerTitle.blur();
+            }
+        });
+    }
+
+    setupThemeToggle() {
+        const themeModeText = document.getElementById('theme-mode-text');
+        const body = document.body;
+
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('timeToGoTheme');
+        if (savedTheme) {
+            body.classList.add(savedTheme);
+            themeModeText.textContent = savedTheme === 'dark-mode' ? 'Dark' : 'Light';
+        }
+
+        themeModeText.addEventListener('click', () => {
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                themeModeText.textContent = 'Light';
+                localStorage.setItem('timeToGoTheme', '');
+            } else {
+                body.classList.add('dark-mode');
+                themeModeText.textContent = 'Dark';
+                localStorage.setItem('timeToGoTheme', 'dark-mode');
             }
         });
     }
