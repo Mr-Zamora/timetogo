@@ -616,6 +616,15 @@ body.dark-mode .copyright-notice {
     color: var(--text-color-dark);
 }
 
+body.dark-mode .copyright-notice a {
+    color: var(--icon-color);
+    transition: color 0.3s ease;
+}
+
+body.dark-mode .copyright-notice a:hover {
+    color: white;
+}
+
 .theme-toggle {
     display: flex;
     justify-content: center;
