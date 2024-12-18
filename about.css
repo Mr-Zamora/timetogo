@@ -325,6 +325,15 @@ body {
     text-decoration: underline;
 }
 
+body.dark-mode .copyright-notice a {
+    color: var(--icon-color);
+    transition: color 0.3s ease;
+}
+
+body.dark-mode .copyright-notice a:hover {
+    color: white;
+}
+
 /* Responsive Design */
 @media screen and (max-width: 768px) {
     .timer-card {
