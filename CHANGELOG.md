@@ -8,6 +8,7 @@
 - Disabled link functionality for About page during active timer
 - Enhanced responsive design for mobile devices
 - Expanded view font size enhancements
+- Dark/Light mode toggle switch
 
 ### Expanded View Improvements
 - Updated font sizes for expanded timer view:
@@ -26,6 +27,57 @@
   - Prevents expand functionality on small screens
 - Adjusted font sizes for better readability on mobile
 - Fine-tuned padding and button sizes for smaller screens
+
+### Dark/Light Mode Improvements
+- Implemented theme toggle in copyright notice
+- Added persistent theme preference using localStorage
+- Created dark mode color palette
+- Styled toggle switch with smooth transitions
+- Maintained consistent design across light and dark modes
+
+### Theme Toggle Features
+- One-click theme switching
+- Remembers user's theme preference
+- Smooth color transitions
+- Accessible design
+
+### Theme Toggle Improvements
+- Replaced toggle switch with text-based theme selector
+- Integrated theme mode text inline with copyright notice
+- Added hover effects for theme mode text
+- Implemented uppercase and letter-spacing for better readability
+- Maintained persistent theme preference
+- Simplified theme switching interaction
+
+### Footer and Copyright Notice Improvements
+- Centered copyright notice and theme toggle
+- Made footer compact and minimalist
+- Implemented transparent background
+- Reduced font size
+- Simplified theme toggle switch design
+
+### User Interface Improvements
+- Added footer hiding when timer card is expanded
+- Improved screen real estate usage during timer expansion
+- Maintained clean and focused user interface during active timer
+
+### Dark Mode Enhancements
+- Added comprehensive dark mode styling for time dropdowns
+- Implemented dark background and text colors for dropdown
+- Created hover and selected state styles for dropdown items
+- Customized scrollbar appearance for dark mode
+- Maintained consistent design language across all components
+
+### Dark Mode Dropdown Improvements
+- Enhanced dropdown hover state with success color
+- Added color and background color change on hover
+- Maintained visual consistency with existing color palette
+
+### Dark Mode Dropdown Enhancements
+- Updated selected/current item style with success color
+- Added success color background and text for active dropdown items
+- Maintained bold font weight for selected items
+- Improved visual hierarchy and interaction feedback
 
 ### Changes in `timetogo.css`
 - Updated CSS variables for progress bar colors
