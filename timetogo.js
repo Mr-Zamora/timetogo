@@ -13,11 +13,16 @@ class Timer {
         this.isTitleFirstFocus = true; 
 
         this.progressColors = {
-            20: 'var(--progress-green)',
-            40: 'var(--progress-yellow-green)',
-            60: 'var(--progress-yellow)',
-            80: 'var(--progress-orange)',
-            100: 'var(--progress-red)'
+            10: 'var(--progress-10)',
+            20: 'var(--progress-20)',
+            30: 'var(--progress-30)',
+            40: 'var(--progress-40)',
+            50: 'var(--progress-50)',
+            60: 'var(--progress-60)',
+            70: 'var(--progress-70)',
+            80: 'var(--progress-80)',
+            90: 'var(--progress-90)',
+            100: 'var(--progress-100)'
         };
 
         this.timerCard = document.querySelector('.timer-card');

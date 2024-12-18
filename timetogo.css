@@ -7,11 +7,19 @@
     --bg-color: #f8f9fa;
     --card-bg: #fff;
     --progress-bg: #e9ecef;
-    --progress-green: #28a745;
-    --progress-yellow-green: #74cd1b;
-    --progress-yellow: #ffe100;
-    --progress-orange: #ff9900;
-    --progress-red: #dc3545;
+    
+    /* Granular progress colors */
+    --progress-10: #28a745;    /* Deep Green (0%) */
+    --progress-20: #4cb342;    /* Transition to lighter green */
+    --progress-30: #6abf3b;    /* Yellow-green blend */
+    --progress-40: #88d227;    /* Balanced yellow-green */
+    --progress-50: #a5e132;    /* Light green-yellow */
+    --progress-60: #ffd633;    /* Soft yellow-orange */
+    --progress-70: #ffbf33;    /* Yellow-orange */
+    --progress-80: #ff9933;    /* Bright orange */
+    --progress-90: #e36454;    /* Light red-orange */
+    --progress-100: #dc3545;   /* Deep Red (100%) */
+    
     --shadow-color: rgba(0, 0, 0, 0.1);
     --border-hover: #dee2e6;
     --icon-color: #6c757d;
@@ -282,7 +290,7 @@ body {
 }
 
 .progress-bar {
-    background: var(--progress-green);
+    background: var(--progress-50);
     height: 100%;
     width: 0%;
     transition: width 0.3s ease, background-color 0.3s ease;
