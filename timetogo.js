@@ -8,9 +8,7 @@ class Timer {
         this.isExpanded = false;
         this.duration = 0;
         this.oldInitialDuration = 0;
-
-        // Track if the title is being focused for the first time
-        this.isTitleFirstFocus = true; 
+        this.isTitleFirstFocus = true; // Track if the title is being focused for the first time
 
         this.progressColors = {
             10: 'var(--progress-10)',
@@ -50,55 +48,46 @@ class Timer {
         this.resetButton.addEventListener('click', () => this.resetTimer());
         this.expandIcon.addEventListener('click', () => this.toggleExpand());
 
-        // Set start and end times to current local time at initial load
         const now = luxon.DateTime.now();
-        let hour24 = now.hour; // 0-23
+        let hour24 = now.hour;
         let minute = now.minute;
         let period = hour24 >= 12 ? 'PM' : 'AM';
-
-        // Convert to 12-hour format
-        let hour12 = hour24 % 12;
-        if (hour12 === 0) hour12 = 12; 
-
-        // Format hour and minute strings
+        let hour12 = hour24 % 12 || 12;
         let hourStr = hour12 < 10 ? `0${hour12}` : `${hour12}`;
         let minuteStr = minute < 10 ? `0${minute}` : `${minute}`;
 
-        // Update start times
         this.startTimeEl.querySelector('.hour').textContent = hourStr;
         this.startTimeEl.querySelector('.minute').textContent = minuteStr;
         this.startTimeEl.querySelector('.period').textContent = period;
-
-        // Update end times
         this.endTimeEl.querySelector('.hour').textContent = hourStr;
         this.endTimeEl.querySelector('.minute').textContent = minuteStr;
         this.endTimeEl.querySelector('.period').textContent = period;
 
-        // Recalculate duration and display
         this.updateDuration();
 
-        // Add theme toggle setup
-        this.setupThemeToggle();
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible' && this.isRunning) {
+                const now = luxon.DateTime.now();
+                const elapsed = now.diff(this.startTime, 'seconds').seconds;
+                this.updateTimer(elapsed);
+            }
+        });
     }
 
     setupTimeEditing() {
         document.querySelectorAll('.time-part').forEach(part => {
             part.addEventListener('click', (e) => {
-                // Close any open dropdowns
                 document.querySelectorAll('.time-dropdown').forEach(d => d.classList.remove('show'));
-    
-                // Find and show the corresponding dropdown
                 const timeContainer = part.closest('.start-time, .end-time');
                 const dropdownType = part.classList.contains('hour') ? 'hour-dropdown' :
                                      part.classList.contains('minute') ? 'minute-dropdown' : 'period-dropdown';
                 const dropdown = timeContainer.querySelector(`.${dropdownType}`);
                 dropdown.classList.add('show');
-    
-                // Highlight current value
+
                 const currentValue = part.textContent;
                 const items = dropdown.querySelectorAll('.dropdown-item');
                 let currentSelectedItem = null;
-    
+
                 items.forEach(item => {
                     const isSelected = item.textContent === currentValue;
                     item.classList.toggle('selected', isSelected);
@@ -106,22 +95,21 @@ class Timer {
                         currentSelectedItem = item;
                     }
                 });
-    
-                // Scroll to the selected item if found
+
                 if (currentSelectedItem) {
                     currentSelectedItem.scrollIntoView({ block: 'nearest' });
                 }
-    
+
                 e.stopPropagation();
             });
         });
-    
+
         document.querySelectorAll('.dropdown-item').forEach(item => {
             item.addEventListener('click', (e) => {
                 const dropdown = item.closest('.time-dropdown');
                 const timeContainer = dropdown.closest('.start-time, .end-time');
                 const value = item.textContent;
-    
+
                 if (dropdown.classList.contains('hour-dropdown')) {
                     timeContainer.querySelector('.hour').textContent = value;
                 } else if (dropdown.classList.contains('minute-dropdown')) {
@@ -129,34 +117,29 @@ class Timer {
                 } else {
                     timeContainer.querySelector('.period').textContent = value;
                 }
-    
+
                 dropdown.classList.remove('show');
                 this.updateDuration();
                 e.stopPropagation();
             });
         });
-    
+
         document.addEventListener('click', () => {
             document.querySelectorAll('.time-dropdown').forEach(d => d.classList.remove('show'));
         });
     }
-    
 
     setupTitleEditing() {
-        this.timerTitle.addEventListener('click', (e) => {
+        this.timerTitle.addEventListener('click', () => {
             if (!this.timerTitle.classList.contains('disabled')) {
-                // On first focus, select all text
                 if (this.isTitleFirstFocus) {
                     const selection = window.getSelection();
                     const range = document.createRange();
                     range.selectNodeContents(this.timerTitle);
                     selection.removeAllRanges();
                     selection.addRange(range);
-
-                    // After first focus, no longer select all automatically
                     this.isTitleFirstFocus = false;
                 }
-                // Subsequent clicks do not reselect all text, allowing normal caret placement.
             }
         });
 
@@ -168,33 +151,7 @@ class Timer {
         });
     }
 
-    setupThemeToggle() {
-        const themeModeText = document.getElementById('theme-mode-text');
-        const body = document.body;
-
-        // Check for saved theme preference
-        const savedTheme = localStorage.getItem('timeToGoTheme');
-        if (savedTheme) {
-            body.classList.add(savedTheme);
-            themeModeText.textContent = savedTheme === 'dark-mode' ? 'Dark' : 'Light';
-        }
-
-        themeModeText.addEventListener('click', () => {
-            if (body.classList.contains('dark-mode')) {
-                body.classList.remove('dark-mode');
-                themeModeText.textContent = 'Light';
-                localStorage.setItem('timeToGoTheme', '');
-            } else {
-                body.classList.add('dark-mode');
-                themeModeText.textContent = 'Dark';
-                localStorage.setItem('timeToGoTheme', 'dark-mode');
-            }
-        });
-    }
-
     updateDuration() {
-        const oldInitialDuration = this.initialDuration;
-
         const startHour = parseInt(this.startTimeEl.querySelector('.hour').textContent);
         const startMinute = parseInt(this.startTimeEl.querySelector('.minute').textContent);
         const startPeriod = this.startTimeEl.querySelector('.period').textContent;
@@ -214,17 +171,11 @@ class Timer {
             endTime = endTime.plus({ days: 1 });
         }
 
-        this.duration = endTime.diff(startTime, 'minutes').minutes; 
-        const roundedDuration = Math.round(this.duration);
-        this.initialDuration = roundedDuration * 60; 
-
-        if (!this.isRunning && oldInitialDuration > 0 && this.elapsedBeforePause > 0) {
-            const ratio = this.elapsedBeforePause / oldInitialDuration;
-            this.elapsedBeforePause = ratio * this.initialDuration;
-        }
+        this.duration = endTime.diff(startTime, 'minutes').minutes;
+        this.initialDuration = Math.round(this.duration) * 60;
 
         if (!this.isRunning) {
-            this.timeRemaining.textContent = `${roundedDuration} minutes to go`;
+            this.timeRemaining.textContent = `${Math.round(this.duration)} minutes to go`;
         }
 
         this.oldInitialDuration = this.initialDuration;
@@ -244,8 +195,7 @@ class Timer {
         if (!this.isRunning) {
             this.startTimer();
             this.startButton.innerHTML = '<i class="fas fa-pause"></i>&nbsp;Pause';
-            this.startButton.classList.remove('start', 'resume');
-            this.startButton.classList.add('pause');
+            this.startButton.classList.replace('start', 'pause');
             this.startTimeEl.classList.add('disabled');
             this.endTimeEl.classList.add('disabled');
             this.timerTitle.classList.add('disabled');
@@ -260,8 +210,7 @@ class Timer {
         } else {
             this.pauseTimer();
             this.startButton.innerHTML = '<i class="fas fa-play"></i>&nbsp;Resume';
-            this.startButton.classList.remove('start', 'pause');
-            this.startButton.classList.add('resume');
+            this.startButton.classList.replace('pause', 'resume');
 
             // Re-enable about link when timer is paused
             const aboutLink = document.querySelector('footer a[href="about.html"]');
@@ -280,84 +229,77 @@ class Timer {
     startTimer() {
         if (this.isRunning) return;
         this.isRunning = true;
-        this.startTime = luxon.DateTime.now();
-        this.interval = setInterval(() => this.updateTimer(), 1000);
+
+        const now = luxon.DateTime.now();
+        this.startTime = now.minus({ seconds: this.elapsedBeforePause });
+
+        this.interval = setInterval(() => {
+            const now = luxon.DateTime.now();
+            const elapsed = now.diff(this.startTime, 'seconds').seconds;
+            this.updateTimer(elapsed);
+        }, 1000);
     }
 
     pauseTimer() {
         if (!this.isRunning) return;
         const now = luxon.DateTime.now();
-        const elapsed = now.diff(this.startTime, 'seconds').seconds;
-        this.elapsedBeforePause += elapsed;
+        this.elapsedBeforePause += now.diff(this.startTime, 'seconds').seconds;
 
         clearInterval(this.interval);
         this.isRunning = false;
-
-        // Allow editing again on pause
         this.timerTitle.classList.remove('disabled');
         this.timerTitle.contentEditable = 'true';
         this.startTimeEl.classList.remove('disabled');
         this.endTimeEl.classList.remove('disabled');
-    }
-
-    resumeTimer() {
-        if (this.isRunning) return;
-        this.isRunning = true;
-        this.startTime = luxon.DateTime.now();
-        this.interval = setInterval(() => this.updateTimer(), 1000);
-
-        // Disable editing again on resume if desired
-        this.timerTitle.classList.add('disabled');
-        this.timerTitle.contentEditable = 'false';
-        this.startTimeEl.classList.add('disabled');
-        this.endTimeEl.classList.add('disabled');
     }
 
     resetTimer() {
         const confirmReset = confirm("Are you sure you want to reset the timer? This will clear all current progress.");
         
-        if (!confirmReset) {
-            return; 
-        }
+        if (!confirmReset) return;
 
         clearInterval(this.interval);
         this.isRunning = false;
         this.startTime = null;
-        this.initialDuration = 0;
         this.elapsedBeforePause = 0;
-        this.duration = 0;
-        this.oldInitialDuration = 0;
 
         this.progressBar.style.width = '0%';
         this.progressBar.style.backgroundColor = this.getProgressColor(0);
         this.timeRemaining.textContent = '0 minutes to go';
 
+        // Fully reenable START button
         this.startButton.innerHTML = '<i class="fas fa-play"></i>&nbsp;Start';
-        this.startButton.classList.remove('pause', 'resume', 'disabled');
-        this.startButton.classList.add('start');
+        this.startButton.classList.replace('pause', 'start');
+        this.startButton.classList.remove('disabled');
         this.startButton.disabled = false;
 
+        // Reenable editing of start and end times
         this.startTimeEl.classList.remove('disabled');
         this.endTimeEl.classList.remove('disabled');
+
+        // Reenable timer title editing
         this.timerTitle.classList.remove('disabled');
         this.timerTitle.contentEditable = 'true';
         this.isTitleFirstFocus = true;
 
-        // Reset times to current time again on reset
-        const now = luxon.DateTime.now();
-        let hour24 = now.hour;
-        let minute = now.minute;
-        let period = hour24 >= 12 ? 'PM' : 'AM';
+        // Reenable footer link
+        const aboutLink = document.querySelector('footer a[href="about.html"]');
+        if (aboutLink) {
+            aboutLink.classList.remove('disabled-link');
+            aboutLink.removeEventListener('click', this.preventNavigation);
+        }
 
-        let hour12 = hour24 % 12;
-        if (hour12 === 0) hour12 = 12; 
-        let hourStr = hour12 < 10 ? `0${hour12}` : `${hour12}`;
-        let minuteStr = minute < 10 ? `0${minute}` : `${minute}`;
+        const now = luxon.DateTime.now();
+        const hour24 = now.hour;
+        const minute = now.minute;
+        const period = hour24 >= 12 ? 'PM' : 'AM';
+        const hour12 = hour24 % 12 || 12;
+        const hourStr = hour12 < 10 ? `0${hour12}` : `${hour12}`;
+        const minuteStr = minute < 10 ? `0${minute}` : `${minute}`;
 
         this.startTimeEl.querySelector('.hour').textContent = hourStr;
         this.startTimeEl.querySelector('.minute').textContent = minuteStr;
         this.startTimeEl.querySelector('.period').textContent = period;
-
         this.endTimeEl.querySelector('.hour').textContent = hourStr;
         this.endTimeEl.querySelector('.minute').textContent = minuteStr;
         this.endTimeEl.querySelector('.period').textContent = period;
@@ -382,12 +324,10 @@ class Timer {
         return this.progressColors[100];
     }
 
-    updateTimer() {
-        const now = luxon.DateTime.now();
-        const elapsed = this.elapsedBeforePause + now.diff(this.startTime, 'seconds').seconds;
-        const progress = (elapsed / this.initialDuration) * 100;
+    updateTimer(elapsedSeconds) {
+        const timeLeftSeconds = this.initialDuration - elapsedSeconds;
 
-        if (progress >= 100) {
+        if (timeLeftSeconds <= 0) {
             this.progressBar.style.width = '100%';
             this.progressBar.style.backgroundColor = this.getProgressColor(100);
             clearInterval(this.interval);
@@ -396,26 +336,33 @@ class Timer {
             this.startButton.disabled = true;
             this.timeRemaining.textContent = 'Time is up';
 
-            // Reenable about link when timer is finished
+            // Reenable footer link
             const aboutLink = document.querySelector('footer a[href="about.html"]');
             if (aboutLink) {
                 aboutLink.classList.remove('disabled-link');
                 aboutLink.removeEventListener('click', this.preventNavigation);
             }
+
+            // Disable editing of start and end times
+            this.startTimeEl.classList.add('disabled');
+            this.endTimeEl.classList.add('disabled');
+
+            // Disable timer title editing
+            this.timerTitle.classList.add('disabled');
+            this.timerTitle.contentEditable = 'false';
+
             return;
         }
 
-        this.progressBar.style.width = `${progress}%`;
-        this.progressBar.style.backgroundColor = this.getProgressColor(progress);
+        this.progressBar.style.width = `${(elapsedSeconds / this.initialDuration) * 100}%`;
+        this.progressBar.style.backgroundColor = this.getProgressColor((elapsedSeconds / this.initialDuration) * 100);
 
-        const timeLeftSeconds = this.initialDuration - elapsed;
         const totalMinutes = Math.ceil(timeLeftSeconds / 60);
         const minuteText = totalMinutes === 1 ? 'minute' : 'minutes';
         this.timeRemaining.textContent = `${totalMinutes} ${minuteText} to go`;
     }
 }
 
-// Initialise timer when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     const timer = new Timer();
 });
