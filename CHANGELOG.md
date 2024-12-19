@@ -109,6 +109,23 @@
 - Accurate time remaining calculation
 - Consistent timer behavior across different user interactions
 
+### Modal Improvements
+- Added detailed onboarding modal with feature explanations
+- Implemented fixed-width icons for consistent alignment
+- Added 1.5 line spacing for better readability
+- Included additional feature descriptions:
+  - Dark/light mode toggle
+  - Fullscreen timer expansion
+- Enhanced modal styling with improved text and icon layout
+- Added hover effect for "Got it" button
+- Ensured left-aligned text with consistent icon spacing
+
+### User Interface Enhancements
+- Updated modal background color for improved readability
+- Added black text color to modal for better contrast
+- Restored time selection dropdowns
+- Maintained responsive design principles
+
 ### Changes in `timetogo.css`
 - Updated CSS variables for progress bar colors
 - Added new color palette with 10 distinct color stages
@@ -129,10 +146,16 @@
   - Re-enable About page link when timer is paused
   - Prevent accidental navigation during active timer
 
+### Changes in `index.html`
+- Updated modal inline styles
+- Added comprehensive dropdown menus for time selection
+- Improved modal text and icon layout
+- Enhanced modal interaction and readability
+
 ### Deployment
 - Committed and deployed to GitHub Pages
 - Live site: [https://mr-zamora.github.io/timetogo/](https://mr-zamora.github.io/timetogo/)
-- Deployment Date: 2024-12-18
+- Deployment Date: 2024-12-19
 
 ### Color Progression Stages
 0. 0-10%: Deep Green (#28a745)
@@ -161,4 +184,4 @@
 
 ---
 
-*Last Updated: 2024-12-18*
+*Last Updated: 2024-12-19*
