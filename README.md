@@ -1,75 +1,26 @@
-# TimeToGo ⏱️
+# Timer Application
 
-## Project Overview
-
-TimeToGo is a modern, responsive web-based timer application designed to help you track and manage your time effectively. With an intuitive interface and flexible features, it provides a seamless time management experience.
+## Overview
+This project is a timer application with features such as start/pause, reset, sound notifications, and responsive design.
 
 ## Features
-
-- 🕒 Customizable Timer
-- 📊 Progress Visualization
-- 🎨 Responsive Design
-- 🌈 Dynamic Color Theming
-- 📱 Mobile-Friendly Interface
-- ✏️ Inline Editable Timer Title
-- 🔄 Expandable/Collapsible Interface
-- ⏳ Interactive Time Selection Dropdowns
+- Start/Pause timer
+- Reset timer
+- Sound notifications
+- Responsive design
+- Dark mode
 
 ## Technology Stack
-
-### Core Front-End Technologies
-- **JavaScript ES6+**
-  - Implements logic using modern JavaScript features
-  - Object-Oriented Programming (OOP) principles
-  - Advanced state management
-- **HTML5**
-  - Semantic, accessible interface
-  - Interactive elements and dynamic content
-- **CSS3**
-  - Responsive, dynamic styling
-  - Custom CSS variables for color transitions
-  - Flexible layout design
-
-### Time Management and Precision
-- **[Luxon](https://moment.github.io/luxon/) Library**
-  - Advanced date-time handling
-  - Real-time accuracy calculations
-  - Handles complex time scenarios
-  - Day transitions
-  - Browser time drift mitigation
-
-### User Experience Features
-- Inline Editable Timer Title
-- Expandable/Collapsible Interface
-- Interactive Time Selection Dropdowns
-- Animated Progress Bar with Color Coding
-- Responsive Design (Mobile & Desktop)
-
-### Advanced JavaScript Techniques
-- Event-Driven Architecture
-- Dynamic DOM Updates
-- Modular, Extensible Class Design
-- State Management
-- Performance Optimization
-
-### Potential Use Cases
-- Study Timer
-- Workout Intervals
-- Project Time Tracking
-- Exam Management
-
-## Prerequisites
-
-- Modern web browser (Chrome, Firefox, Safari, Edge)
-- No additional installations required
+- HTML
+- CSS
+- JavaScript
 
 ## Getting Started
-
-### Installation
+To get started with the project, follow these steps:
 
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/timetogo.git
+   ```sh
+   git clone https://github.com/your-repo/timer-app.git
    ```
 
 2. Open `index.html` in your preferred web browser
@@ -143,4 +94,4 @@ Project Link: [https://github.com/yourusername/timetogo](https://github.com/your
 
 ---
 
-**Made with ❤️ by a passionate developer and highschool teacher.**
+**Made with ❤️ by a passionate developer and high school teacher.**
