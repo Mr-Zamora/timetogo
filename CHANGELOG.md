@@ -126,6 +126,12 @@
 - Restored time selection dropdowns
 - Maintained responsive design principles
 
+### Sound Improvements
+- Added a sound toggle feature to enable or disable alarm sounds.
+- Updated the sound icon to reflect the current sound state (muted or unmuted).
+- Improved the user interface with an About link explaining the purpose of the application.
+- Enhanced the modal section with clear instructions for sound functionality and editing options.
+
 ### Changes in `timetogo.css`
 - Updated CSS variables for progress bar colors
 - Added new color palette with 10 distinct color stages

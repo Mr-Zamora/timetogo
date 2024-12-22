@@ -37,6 +37,13 @@ class Timer {
         this.startTimeEl = document.querySelector('.start-time');
         this.endTimeEl = document.querySelector('.end-time');
 
+        this.isSoundOn = false; // Variable to track sound state
+        this.soundIcon = document.getElementById('sound-icon');
+
+        // Set the initial icon to "muted"
+        this.soundIcon.classList.remove('fa-volume-up');
+        this.soundIcon.classList.add('fa-volume-mute');
+
         this.progressBar.style.width = '0%';
         this.progressBar.style.backgroundColor = this.getProgressColor(0);
         this.timeRemaining.textContent = '0 minutes to go';
@@ -79,6 +86,9 @@ class Timer {
 
         // Add theme toggle setup
         this.setupThemeToggle();
+
+        // Event listener for the sound toggle icon
+        this.soundIcon.addEventListener('click', () => this.toggleSound());
     }
 
     setupTimeEditing() {
@@ -372,6 +382,18 @@ class Timer {
         this.expandIconI.classList.toggle('fa-compress');
     }
 
+    toggleSound() {
+        this.isSoundOn = !this.isSoundOn; // Toggle the sound state
+
+        if (this.isSoundOn) {
+            this.soundIcon.classList.remove('fa-volume-mute');
+            this.soundIcon.classList.add('fa-volume-up');
+        } else {
+            this.soundIcon.classList.remove('fa-volume-up');
+            this.soundIcon.classList.add('fa-volume-mute');
+        }
+    }
+
     getProgressColor(percentage) {
         const thresholds = Object.keys(this.progressColors).map(Number).sort((a, b) => a - b);
         for (const threshold of thresholds) {
@@ -395,6 +417,9 @@ class Timer {
             this.startButton.classList.add('disabled');
             this.startButton.disabled = true;
             this.timeRemaining.textContent = 'Time is up';
+            if (this.isSoundOn) {
+                this.playAlarm(); // Call the function to play the alarm sound
+            }
             return;
         }
 
@@ -406,9 +431,43 @@ class Timer {
         const minuteText = totalMinutes === 1 ? 'minute' : 'minutes';
         this.timeRemaining.textContent = `${totalMinutes} ${minuteText} to go`;
     }
+
+    playAlarm() {
+        let alarmSound; // Declare a variable to hold the alarm sound
+
+        // Function to play the default OS alarm sound
+        function playAlarm() {
+            alarmSound = new Audio('C:\\Windows\\Media\\Alarm01.wav'); // Path to the alarm sound
+            alarmSound.loop = true; // Set to loop
+            alarmSound.play();
+        }
+
+        // Function to stop the alarm sound
+        function stopAlarm() {
+            if (alarmSound) {
+                alarmSound.pause(); // Pause the sound
+                alarmSound.currentTime = 0; // Reset the sound to the beginning
+            }
+        }
+
+        // Event listener to stop the alarm on key press or mouse click
+        document.addEventListener('keydown', stopAlarm);
+        document.addEventListener('click', stopAlarm);
+
+        playAlarm();
+    }
+
+    checkTimer(timerValue) {
+        if (timerValue <= 0) {
+            if (this.isSoundOn) {
+                this.playAlarm(); // Call the function to play the alarm sound
+            }
+        }
+    }
 }
 
 // Initialise timer when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     const timer = new Timer();
+    timer.soundIcon.classList.add('fa-volume-mute'); // Ensure the icon is set to mute initially
 });

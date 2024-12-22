@@ -437,6 +437,34 @@ body.dark-mode .time-dropdown::-webkit-scrollbar-thumb {
     font-size: 3.5rem;
 }
 
+.sound-toggle-icon {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    opacity: 0;
+    visibility: hidden;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--icon-color);
+    color: white;
+}
+
+.timer-card:hover .sound-toggle-icon {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sound-toggle-icon:hover {
+    background-color: var(--text-color);
+    transform: scale(1.1);
+}
+
 /* Tooltip styles */
 [data-tooltip] {
     position: relative;
