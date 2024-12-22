@@ -433,29 +433,27 @@ class Timer {
     }
 
     playAlarm() {
-        let alarmSound; // Declare a variable to hold the alarm sound
-
-        // Function to play the default OS alarm sound
-        function playAlarm() {
-            alarmSound = new Audio('C:\\Windows\\Media\\Alarm01.wav'); // Path to the alarm sound
-            alarmSound.loop = true; // Set to loop
-            alarmSound.play();
-        }
-
-        // Function to stop the alarm sound
-        function stopAlarm() {
-            if (alarmSound) {
-                alarmSound.pause(); // Pause the sound
-                alarmSound.currentTime = 0; // Reset the sound to the beginning
-            }
-        }
-
-        // Event listener to stop the alarm on key press or mouse click
-        document.addEventListener('keydown', stopAlarm);
+        const alarmSound = new Audio('sounds/Alarm01.wav'); // Path to the sound file in your project
+        alarmSound.loop = true;
+    
+        // Try playing the alarm sound and handle any errors
+        alarmSound.play().catch(error => {
+            console.error('Error playing alarm sound:', error);
+        });
+    
+        // Function to stop the alarm
+        const stopAlarm = () => {
+            alarmSound.pause();
+            alarmSound.currentTime = 0; // Reset to the start
+            document.removeEventListener('click', stopAlarm);
+            document.removeEventListener('keydown', stopAlarm);
+        };
+    
+        // Add listeners to stop the alarm
         document.addEventListener('click', stopAlarm);
-
-        playAlarm();
+        document.addEventListener('keydown', stopAlarm);
     }
+    
 
     checkTimer(timerValue) {
         if (timerValue <= 0) {
