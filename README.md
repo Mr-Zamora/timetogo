@@ -143,4 +143,4 @@ Project Link: [https://github.com/yourusername/timetogo](https://github.com/your
 
 ---
 
-**Made with ❤️ by a passionate developer and high school teacher.**
+**Made with ❤️ by a passionate developer and highschool teacher.**
