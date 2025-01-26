@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+            overflow: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            text-align: center;
+            user-select: none;
+            font-size: 3rem;
+        }
+
+        h1[contenteditable="true"] {
+            border: 1px dashed #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .time-display {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .stopwatch-display {
+            font-size: 12rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            opacity: 1;
+            transition: opacity 0.3s;
+        }
+
+        .buttons.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        button {
+            padding: 20px 40px;
+            font-size: 2rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: #fff;
+            flex: 1;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        button.stop {
+            background-color: #dc3545;
+        }
+
+        button.reset {
+            background-color: #28a745;
+        }
+
+        @media (max-width: 600px) {
+            .stopwatch-display {
+                font-size: 5rem;
+            }
+
+            button {
+                padding: 15px 30px;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 contenteditable="true" id="heading">Stopwatch</h1>
+    <div class="time-display" id="current-time"></div>
+    <div class="stopwatch-display" id="stopwatch">00:00:00</div>
+    <div class="buttons" id="buttons">
+        <button id="reset-button" disabled>Reset</button>
+        <button id="start-button">Start</button>
+    </div>
+
+    <script>
+        const currentTimeElement = document.getElementById('current-time');
+        const stopwatchElement = document.getElementById('stopwatch');
+        const startButton = document.getElementById('start-button');
+        const resetButton = document.getElementById('reset-button');
+        const buttonsContainer = document.getElementById('buttons');
+        const heading = document.getElementById('heading');
+
+        let stopwatchInterval;
+        let elapsedTime = 0;
+        let isRunning = false;
+        let hideTimeout;
+
+        // Update the current time every second
+        function updateCurrentTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
+            currentTimeElement.textContent = `Current Time: ${timeString}`;
+        }
+        setInterval(updateCurrentTime, 1000);
+
+        // Format time to hh:mm:ss
+        function formatTime(timeInSeconds) {
+            const hours = Math.floor(timeInSeconds / 3600).toString().padStart(2, '0');
+            const minutes = Math.floor((timeInSeconds % 3600) / 60).toString().padStart(2, '0');
+            const seconds = (timeInSeconds % 60).toString().padStart(2, '0');
+            return `${hours}:${minutes}:${seconds}`;
+        }
+
+        // Start/Stop/Resume the stopwatch
+        startButton.addEventListener('click', () => {
+            if (!isRunning) {
+                isRunning = true;
+                startButton.textContent = 'Stop';
+                startButton.classList.add('stop');
+                resetButton.disabled = false;
+
+                stopwatchInterval = setInterval(() => {
+                    elapsedTime++;
+                    stopwatchElement.textContent = formatTime(elapsedTime);
+                }, 1000);
+            } else {
+                isRunning = false;
+                startButton.textContent = 'Resume';
+                startButton.classList.remove('stop');
+                clearInterval(stopwatchInterval);
+            }
+        });
+
+        // Reset the stopwatch
+        resetButton.addEventListener('click', () => {
+            clearInterval(stopwatchInterval);
+            elapsedTime = 0;
+            isRunning = false;
+            stopwatchElement.textContent = '00:00:00';
+            startButton.textContent = 'Start';
+            startButton.classList.remove('stop');
+            resetButton.disabled = true;
+        });
+
+        // Toggle dark mode on background click
+        document.body.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+
+        // Hide buttons after 3 seconds
+        function hideButtons() {
+            hideTimeout = setTimeout(() => {
+                buttonsContainer.classList.add('hidden');
+            }, 3000);
+        }
+
+        // Show buttons and reset hide timer
+        function showButtons() {
+            clearTimeout(hideTimeout);
+            buttonsContainer.classList.remove('hidden');
+            hideButtons();
+        }
+
+        // Attach hover and click events to show buttons
+        [stopwatchElement, currentTimeElement, heading].forEach(element => {
+            element.addEventListener('mouseenter', showButtons);
+            element.addEventListener('mouseleave', hideButtons);
+        });
+
+        // Start the initial hide timer
+        hideButtons();
+    </script>
+</body>
+</html>
