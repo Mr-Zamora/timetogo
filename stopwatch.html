@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stopwatch App</title>
     <style>
+        /* Body styling */
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -18,16 +19,18 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
+        /* Dark mode */
         body.dark-mode {
             background-color: #121212;
             color: #ffffff;
         }
 
+        /* Heading with responsive font size using clamp */
         h1 {
             margin-bottom: 20px;
             text-align: center;
             user-select: none;
-            font-size: 3rem;
+            font-size: clamp(2rem, 6vw, 3rem);
         }
 
         h1[contenteditable="true"] {
@@ -36,17 +39,20 @@
             border-radius: 5px;
         }
 
+        /* Current time display with responsive font size */
         .time-display {
-            font-size: 2rem;
+            font-size: clamp(1rem, 4vw, 2rem);
             margin-bottom: 20px;
         }
 
+        /* Stopwatch display with clamp for full responsiveness */
         .stopwatch-display {
-            font-size: 12rem;
+            font-size: clamp(3rem, 15vw, 18rem);
             font-weight: bold;
             margin-bottom: 30px;
         }
 
+        /* Buttons container with fade-out effect */
         .buttons {
             display: flex;
             gap: 20px;
@@ -59,9 +65,10 @@
             pointer-events: none;
         }
 
+        /* Buttons with responsive padding and font size */
         button {
-            padding: 20px 40px;
-            font-size: 2rem;
+            padding: clamp(10px, 3vw, 20px) clamp(20px, 6vw, 40px);
+            font-size: clamp(1rem, 3vw, 2rem);
             border: none;
             border-radius: 10px;
             cursor: pointer;
@@ -81,17 +88,6 @@
 
         button.reset {
             background-color: #28a745;
-        }
-
-        @media (max-width: 600px) {
-            .stopwatch-display {
-                font-size: 5rem;
-            }
-
-            button {
-                padding: 15px 30px;
-                font-size: 1.5rem;
-            }
         }
     </style>
 </head>
